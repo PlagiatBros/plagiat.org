@@ -33,7 +33,7 @@
         for ($i=0; $i < sizeof($media); $i++) {
 
             $texte = str_replace($media[$i]['url'], '', $texte);
-            $texte .= '<a class="media" href="' . $media[$i]['expanded_url'] . '"><img src="' . $media[$i]['media_url_https'] . '"/></a>';
+            $texte .= '<a target="_blank" class="media" href="' . $media[$i]['expanded_url'] . '"><img src="' . $media[$i]['media_url_https'] . '"/></a>';
 
         }
 
