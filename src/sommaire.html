@@ -11,7 +11,7 @@
     <link rel="canonical" href="#GET{page_url}" />
     <meta name="description" content="[(#DESCRIPTIF_SITE_SPIP|textebrut)]" />
     <meta property="og:image" content="[(#LOGO_SITE_SPIP|image_recadre{'19:10', '+', 'center top', #ffffff}|extraire_attribut{src}|supprimer_timestamp|url_absolue)]"/>
-    #SET{css, #INCLURE{styles.css}|minify|replace{\$bg, #LOGO_SITE_SPIP|extraire_attribut{src}}}
+    #SET{css, #INCLURE{styles.css}|minify|replace{\$bg, #LOGO_SITE_SPIP|image_reduire{640, 0}|extraire_attribut{src}}}
     <style>
         /* src: #CHEMIN{styles.css} */
         #GET{css}
