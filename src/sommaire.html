@@ -39,5 +39,13 @@
 </BOUCLE_articles>
 
 </BOUCLE_rubrique>
+
+<script>
+    window.onhashchange = function(){
+        if (location.hash === '') {
+            history.replaceState('', document.title, location.pathname + location.search);
+        }
+    }
+</script>
 </body>
 </html>
