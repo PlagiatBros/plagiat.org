@@ -14,8 +14,11 @@
     |extraire_attribut{src}
 }
 
+#SET{img_opt, #GET{img}|image_reduire{518, 0}}
+[(#GET{img}|match{.png}|oui)#SET{img_opt, #GET{img_opt}|image_aplatir{jpg, #ffffff, 128}}]
+
 [(#GET{texte}
-    |replace{#GET{img}, #GET{img}|image_reduire{518, 0}|extraire_attribut{src}}
+    |replace{#GET{img}, #GET{img_opt}|extraire_attribut{src}}
 )]
 
 
