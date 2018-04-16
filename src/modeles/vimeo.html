@@ -3,7 +3,7 @@
 <BOUCLE_vimeo(DATA){source json, #GET{json}}>
 
 <a class="media video" href="#URL" target="_blank" title="#VALEUR{title}">
-[(#VALEUR{thumbnail_url}|image_reduire{518,0})]
+[(#VALEUR{thumbnail_url}|image_reduire{518,0}|inserer_attribut{alt, #URL})]
 </a>
 
 </BOUCLE_vimeo>
