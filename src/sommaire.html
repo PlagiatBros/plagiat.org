@@ -9,8 +9,10 @@
     <title>[(#NOM_SITE_SPIP|textebrut)] - [(#SLOGAN_SITE_SPIP|textebrut)]</title>
     <link rel="canonical" href="#GET{page_url}" />
     <link rel="shortcut icon" href="favicon.ico" />
+    #SET{css, #INCLURE{styles.css}|minify}
     <style>
-        #INCLURE{styles.css}
+        /* src: #CHEMIN{styles.css} */
+        #GET{css}
     </style>
 </head>
 <body>

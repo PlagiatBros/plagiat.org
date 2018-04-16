@@ -1,5 +1,11 @@
 <?php
 
+    function filtre_minify($css) {
+        $css = preg_replace('/\n/', '', $css);
+        $css = preg_replace('/\s+/', ' ', $css);
+        return $css;
+    }
+
     function filtre_twitter_urls($texte, $entities) {
 
         $texte = str_replace('<br class=\'autobr\' />', '', $texte);
