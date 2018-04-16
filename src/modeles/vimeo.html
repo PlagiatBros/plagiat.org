@@ -1,9 +1,9 @@
 #SET{json, http://softrains.fr/vimeo-proxy.php?key=#VIMEO_PROXY_KEY&url=#URL}
 
 <BOUCLE_vimeo(DATA){source json, #GET{json}}>
-
-<a class="media video" href="#URL" target="_blank" title="#VALEUR{title}">
-[(#VALEUR{thumbnail_url}|image_reduire{518,0}|inserer_attribut{alt, #URL})]
+#SET{url, https://vimeo.com/#VALEUR{video_id}?autoplay=1}
+<a class="media video" href="#GET{url}" target="_blank" title="#VALEUR{title}">
+[(#VALEUR{thumbnail_url}|image_reduire{518,0}|inserer_attribut{alt, #GET{url}})]
 </a>
 
 </BOUCLE_vimeo>
