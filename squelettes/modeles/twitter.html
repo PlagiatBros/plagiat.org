@@ -1,0 +1,32 @@
+<BOUCLE_twitter(DATA){source twitter, statuses/user_timeline?tweet_mode=extended}{0,20}>[(#VALEUR{in_reply_to_status_id}|non)
+<div  class="tweet">
+
+<div class="when">[(#VALEUR{created_at}|rfc2iso|affdate)]</div>
+
+#SET{texte, #VALEUR{full_text}
+    |propre
+    |twitter_urls{#VALEUR{entities}}
+    |liens_ouvrants
+}
+
+#SET{img, #GET{texte}
+    |extraire_balise{img}
+    |extraire_attribut{src}
+}
+
+[(#GET{texte}
+    |replace{#GET{img}, #GET{img}|image_reduire{518, 0}|extraire_attribut{src}}
+)]
+
+
+#SET{video, #VAL{""}|twitter_video{#VALEUR{entities}}}
+
+[(#GET{video}|match{youtu}|oui)
+#INCLURE{fond=modeles/youtube, url=#GET{video}}]
+[(#GET{video}|match{vimeo}|oui)
+#INCLURE{fond=modeles/vimeo, url=#GET{video}}]
+
+</div>
+]</BOUCLE_twitter>
+
+<center><a target="_blank" href="https://twitter.com/PlagiatBros">...</a></center>

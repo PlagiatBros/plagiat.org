@@ -1,0 +1,10 @@
+SPIP 3.2.x
+
+PLUGINS
+ - newsletter
+ - spip bonux
+ - simple calendrier
+ - twitter
+
+SETUP
+ - edit squelettes/api_keys.php

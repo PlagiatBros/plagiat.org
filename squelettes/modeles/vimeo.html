@@ -1,0 +1,9 @@
+#SET{json, https://vimeo.com/api/oembed.json?url=#URL|rawurlencode}
+
+<BOUCLE_vimeo(DATA){source json, #GET{json}}>
+
+<a class="media" href="#URL" target="_blank" title="#VALEUR{title}">
+[(#VALEUR{thumbnail_url}|image_reduire{518,0})]
+</a>
+
+</BOUCLE_vimeo>

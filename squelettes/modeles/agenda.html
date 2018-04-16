@@ -1,0 +1,12 @@
+<ul class="agenda">
+<BOUCLE_agenda(EVENEMENTS){par date_debut}{date_debut > #ENV{date}}>
+    <li class="content" itemprop="event" itemscope itemtype="http://schema.org/Event" >
+        <meta itemprop="startDate" content="[(#HORAIRE|=={oui}|?{#DATE_DEBUT|affdate{'c'}, #DATE_DEBUT|affdate{'Y-m-d'}})]"/>
+        <strong>
+            <span itemprop="name" style="display:none">#NOM_SITE_SPIP</span>
+            <span>[(#DATE_DEBUT|affdate{'d/m'})][(#HORAIRE|=={oui}|oui) | [(#DATE_DEBUT|affdate{'H\Hi'})]]</span> @ <span itemprop="location" itemscope itemtype="http://schema.org/Place"><span itemprop="address">#TITRE</span></span>
+        </strong>
+        [<span>&emsp;(#TEXTE)</span>]
+    </li>
+</BOUCLE_agenda>
+</ul>

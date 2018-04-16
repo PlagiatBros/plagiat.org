@@ -1,0 +1,10 @@
+#SET{id,#ENV{url}|video_id}
+#SET{json, #VAL{https://www.googleapis.com/youtube/v3/videos?}|concat{part=snippet&fields=items(snippet(title,thumbnails))&key=,#YOUTUBE_API_KEY,&id=#GET{id}}}
+
+<BOUCLE_youtube(DATA){datapath items}{source json, #GET{json}}>
+
+<a class="media video" href="#URL" target="_blank" title="#VALEUR{snippet/title}">
+[(#VALEUR{snippet/thumbnails/maxres/url}|sinon{#VALEUR{snippet/thumbnails/standard/url}}|sinon{#VALEUR{snippet/thumbnails/medium/url}}|image_reduire{518,0})]
+</a>
+
+</BOUCLE_youtube>

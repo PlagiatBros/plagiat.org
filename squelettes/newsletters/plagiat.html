@@ -1,0 +1,47 @@
+[(#REM)<!-- titre=Newsletter Plagiat -->]
+<BOUCLE_newsletter(NEWSLETTERS){id_newsletter}{statut?}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>[(#TITRE|textebrut)]</title>
+    <style>
+        body {
+            background: #ffffff;
+            color: #000000;
+            font-size: 13px;
+            font-family:
+        }
+        .big {
+            font-size: 16px;
+        }
+        .small {
+            font-size: 10px;
+        }
+        pre {
+            color: #444444;
+        }
+    </style>
+</head>
+<body>
+
+[(#TEXTE*|propre|liens_ouvrants)]
+
+====
+
+<pre>
+--
+Plagiat [plaʒja]
+Plagiat est une faute d'ordre moral
+<a href="https://www.plagiat.org">www.plagiat.org</a>
+<a href="https://www.ammd.net">www.ammd.net</a>[(#ENV{online}|non)
+
+<a href="@url_unsubscribe@"><i>Clique isssci pour ne plus ressscevoir ce torchon</i></a>]
+</pre>
+
+</body>
+</html>
+</BOUCLE_newsletter>
+
+#FILTRE{newsletters_liens_absolus}
+#FILTRE{inline}
