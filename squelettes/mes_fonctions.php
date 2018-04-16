@@ -115,6 +115,10 @@
     require "api_keys.php";
 
 
+    function balise_VIMEO_PROXY_KEY($p) {
+        $p->code = $GLOBALS['vimeo_proxy_key'];
+        return $p;
+    }
     function balise_YOUTUBE_API_KEY($p) {
         $p->code = $GLOBALS['youtube_api_key'];
         return $p;

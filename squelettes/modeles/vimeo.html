@@ -1,8 +1,8 @@
-#SET{json, https://vimeo.com/api/oembed.json?url=#URL|rawurlencode}
+#SET{json, http://softrains.fr/vimeo-proxy.php?key=#VIMEO_PROXY_KEY&url=#URL}
 
 <BOUCLE_vimeo(DATA){source json, #GET{json}}>
 
-<a class="media" href="#URL" target="_blank" title="#VALEUR{title}">
+<a class="media video" href="#URL" target="_blank" title="#VALEUR{title}">
 [(#VALEUR{thumbnail_url}|image_reduire{518,0})]
 </a>
 
