@@ -8,8 +8,8 @@
     <meta charset="utf-8"/>
     <title>[(#NOM_SITE_SPIP|textebrut)] - [(#SLOGAN_SITE_SPIP|textebrut)]</title>
     <link rel="canonical" href="#GET{page_url}" />
-    <link rel="shortcut icon" href="favicon.ico" />
-    #SET{css, #INCLURE{styles.css}|minify}
+    <link rel="shortcut icon" href="#CHEMIN{favicon.png}" />
+    #SET{css, #INCLURE{styles.css}|minify|replace{\$bg, #LOGO_SITE_SPIP|extraire_attribut{src}}}
     <style>
         /* src: #CHEMIN{styles.css} */
         #GET{css}
