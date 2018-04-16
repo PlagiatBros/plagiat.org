@@ -7,4 +7,4 @@ PLUGINS
  - twitter
 
 SETUP
- - edit squelettes/api_keys.php
+ - edit src/api_keys.php
