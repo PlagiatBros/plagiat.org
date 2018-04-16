@@ -2,8 +2,8 @@
 
     if (!defined('_ECRIRE_INC_VERSION')) return;
 
+    $spip_header_silencieux = 1;
+
     $GLOBALS['dossier_squelettes'] = 'src';
-    
-    define('_HEADER_COMPOSED_BY', 'PLAGIAT BROTHERS INC.');
 
 ?>
