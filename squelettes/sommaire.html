@@ -17,11 +17,20 @@
 
 <BOUCLE_rubrique(RUBRIQUES){par num titre}{0, 1}{tout}>
 
+<div class="nav">
+    <ul>
+        <li><a href="#">[plaʒia]</a></li>
+    <BOUCLE_nav(ARTICLES){id_rubrique}{par num titre}{1,10}>
+        <li><a href="#[(#TITRE|textebrut|replace{' ',''})]">#TITRE</a></li>
+    </BOUCLE_nav>
+    </ul>
+</div>
+
 <h1>#TITRE</h1>
 
 <BOUCLE_articles(ARTICLES){id_rubrique}{par num titre}>
 
-<h2>#TITRE</h2>
+<h2><a id="[(#TITRE|textebrut|replace{' ',''})]"></a>#TITRE</h2>
 
 #TEXTE
 

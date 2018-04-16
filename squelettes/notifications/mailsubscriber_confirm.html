@@ -1,0 +1,24 @@
+<BOUCLE_susc(MAILSUBSCRIBERS){id_mailsubscriber}{statut?}{tout}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>[#NOM_SITE_SPIP] Inscription à la newsletter</title>
+</head>
+<body style="background: #ffffff;color: #000000;font-size: 13px;font-family:">
+
+<p>Ok #EMAIL, clique sur ce lien potentiellement frauduleux pour recevoir notre newsletter:</p>
+
+<p><a href="[(#EMAIL*|mailsubscriber_url_confirm{#JETON*[+(#ID_MAILSUBSCRIBINGLIST)]}|url_absolue)]">RECEVOIR LE TORCHON PÉRIODIQUE DES PLAGIAT BROTHERS</a></p>
+
+<pre style="margin-top:40px; color:#444444">
+--
+Plagiat [plaʒja]
+Plagiat est une faute d'ordre moral
+<a href="https://www.plagiat.org">www.plagiat.org</a>
+<a href="https://www.ammd.net">www.ammd.net</a>
+</pre>
+
+</body>
+</html>
+</BOUCLE_susc>

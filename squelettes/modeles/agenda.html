@@ -1,12 +1,22 @@
 <ul class="agenda">
-<BOUCLE_agenda(EVENEMENTS){par date_debut}{date_debut > #ENV{date}}>
-    <li class="content" itemprop="event" itemscope itemtype="http://schema.org/Event" >
-        <meta itemprop="startDate" content="[(#HORAIRE|=={oui}|?{#DATE_DEBUT|affdate{'c'}, #DATE_DEBUT|affdate{'Y-m-d'}})]"/>
+    <input type="checkbox" class="gate"/>
+    <div class="gate-label">J'en ai rien à foutre de vos conneries, je veux juste voir les conssscerts !</div>
+    <div class="clear"></div>
+<BOUCLE_agenda(EVENEMENTS){par date_debut}>
+    #SET{fakenews, ""}#SET{mystere, ""}
+    <BOUCLE_tags(MOTS){id_evenement}>[(#ID_MOT|=={1}|oui)#SET{fakenews, oui}][(#ID_MOT|=={2}|oui)#SET{mystere, oui}]</BOUCLE_tags>
+    <li class="event [(#DATE_DEBUT|<{#ENV{date}}|oui)past] [(#GET{fakenews}|oui)noise]" [(#GET{mystere}|non)itemprop="event" itemscope itemtype="http://schema.org/Event"]>
+        [(#GET{mystere}|non)<meta itemprop="startDate" content="[(#HORAIRE|=={oui}|?{#DATE_DEBUT|affdate{'c'}, #DATE_DEBUT|affdate{'Y-m-d'}})]"/>]
         <strong>
             <span itemprop="name" style="display:none">#NOM_SITE_SPIP</span>
-            <span>[(#DATE_DEBUT|affdate{'d/m'})][(#HORAIRE|=={oui}|oui) | [(#DATE_DEBUT|affdate{'H\Hi'})]]</span> @ <span itemprop="location" itemscope itemtype="http://schema.org/Place"><span itemprop="address">#TITRE</span></span>
+            [(#GET{mystere}|non)
+                <span>[(#DATE_DEBUT|affdate{'d/m'})][(#HORAIRE|=={oui}|oui) | [(#DATE_DEBUT|affdate{'H\Hi'})]]</span><span itemprop="location" itemscope itemtype="http://schema.org/Place">
+            ][(#GET{mystere}|oui)
+                <span>??/??</span>
+            ]
+            @ <span itemprop="address">#TITRE</span>[(#GET{mystere}|oui)</span>]
         </strong>
-        [<span>&emsp;(#TEXTE)</span>]
+        [<div class="detail">(#TEXTE|textebrut)</div>]
     </li>
 </BOUCLE_agenda>
 </ul>
