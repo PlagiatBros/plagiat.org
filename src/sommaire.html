@@ -25,7 +25,7 @@
     <ul>
         <li><a href="#">[plaʒia]</a></li>
     <BOUCLE_nav(ARTICLES){id_rubrique}{par num titre}{1,10}>
-        <li><a href="#[(#TITRE|textebrut|replace{' ',''})]">#TITRE</a></li>
+        <li><a href="#[(#TITRE|textebrut|replace{' ',''})]">[(#TITRE|textebrut)]</a></li>
     </BOUCLE_nav>
     </ul>
 </div>
@@ -73,12 +73,7 @@
         })
     }
 
-    window.onscroll = function(){
-        if (debounce) {
-            debounce = clearTimeout(debounce)
-        }
-        debounce = setTimeout(checkScroll, 1000/30)
-    }
+    window.onscroll = checkScroll
 
     document.addEventListener('DOMContentLoaded', checkScroll)
 

@@ -31,13 +31,13 @@ a:hover, a:active {
     text-decoration: underline;
 }
 h1 {
-    font-family: mono;
+    font-family: "Liberation Mono", "Courrier New", mono;
     font-weight: normal;
     margin-top:80px;
     margin-bottom:40px;
 }
 h2 {
-    font-family: mono;
+    font-family: "Liberation Mono", "Courrier New", mono;
     font-weight: normal;
     margin-top:40px;
     position: relative;
@@ -47,15 +47,15 @@ h2 a {
     top:-60px;
 }
 h3 {
-    font-family: mono;
+    font-family: "Liberation Mono", "Courrier New", mono;
     font-weight: normal;
     margin-top:20px;
 }
-.faute:hover .src {
+.faute:hover span {
     display: none;
 }
-.faute:hover .alt.hide {
-    display: initial;
+.faute:hover:before {
+    content: attr(data-alt);
 }
 .hide {
     display: none;
