@@ -53,10 +53,10 @@
 
     // display current section
     var navitems = document.querySelectorAll('.nav li a'),
-        anchors = document.querySelectorAll('.anchor')
+        anchors = document.querySelectorAll('.anchor'),
+        debounce
 
-    window.onscroll = function(){
-
+    function checkScroll() {
         var nearest, bestScore = Infinity
 
         anchors.forEach(function(a, i){
@@ -71,10 +71,16 @@
         navitems.forEach(function(a, i){
             a.classList.toggle('on', nearest && nearest.getAttribute('data-anchor') == i)
         })
-
     }
 
-    document.addEventListener('DOMContentLoaded', window.onscroll)
+    window.onscroll = function(){
+        if (debounce) {
+            debounce = clearTimeout(debounce)
+        }
+        debounce = setTimeout(checkScroll, 1000/30)
+    }
+
+    document.addEventListener('DOMContentLoaded', checkScroll)
 
 </script>
 </body>
