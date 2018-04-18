@@ -8,3 +8,4 @@ PLUGINS
 
 SETUP
  - edit src/api_keys.php
+ - rename squelettes-dist to squelettes-dist.backup
