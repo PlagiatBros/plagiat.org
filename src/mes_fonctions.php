@@ -1,10 +1,14 @@
 <?php
 
-    function filtre_minify($css, $indent) {
+    function filtre_minify($css) {
         $css = preg_replace('/\n/', '', $css);
         $css = preg_replace('/\s+/', ' ', $css);
         $css = preg_replace('/\/\*.*\*\//', '', $css);
-        $css = preg_replace('/;?\}/', "}" . $indent, $css);
+        $css = preg_replace('/;?\}/', "}", $css);
+        $css = preg_replace('/\s*\{\s*/', "{", $css);
+        $css = preg_replace('/\s*,\s*/', ",", $css);
+        $css = preg_replace('/\s*;\s*/', ";", $css);
+        $css = preg_replace('/:\s+/', ":", $css);
         return $css;
     }
 
