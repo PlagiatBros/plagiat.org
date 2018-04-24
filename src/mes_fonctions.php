@@ -1,6 +1,6 @@
 <?php
 
-    function filtre_minify($css) {
+    function filtre_minify_css($css) {
         $css = preg_replace('/\n/', '', $css);
         $css = preg_replace('/\s+/', ' ', $css);
         $css = preg_replace('/\/\*.*\*\//', '', $css);
