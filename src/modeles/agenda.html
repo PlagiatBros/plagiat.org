@@ -1,11 +1,16 @@
 <ul class="agenda">
-    <input type="checkbox" class="gate"/>
-    <div class="gate-label">J'en ai rien à foutre de vos conneries, je veux juste voir les conssscerts !</div>
+    <input type="checkbox" class="gate" name="noise"/>
+    <div class="gate-label"><:agenda_noisegate:></div>
     <div class="clear"></div>
+    <input type="checkbox" class="gate" name="old"/>
+    <div class="gate-label"><:agenda_oldgate:></div>
+    <div class="clear"></div>
+    #SET{old, #ENV{old, '-6 months'}|strtotime}
+    #SET{hier, #VAL{'-1 day'}|strtotime}
 <BOUCLE_agenda(EVENEMENTS){par date_debut}>
     #SET{fakenews, ""}#SET{mystere, ""}
     <BOUCLE_tags(MOTS){id_evenement}>[(#ID_MOT|=={1}|oui)#SET{fakenews, oui}][(#ID_MOT|=={2}|oui)#SET{mystere, oui}]</BOUCLE_tags>
-    <li class="event [(#DATE_DEBUT|<{#ENV{date}}|oui)past] [(#GET{fakenews}|oui)noise]" [(#GET{mystere}|non)itemprop="event" itemscope itemtype="http://schema.org/Event"]>
+    <li class="event [(#DATE_DEBUT|affdate{'U'}|<{#GET{hier}}|oui)past] [(#DATE_DEBUT|affdate{'U'}<{#GET{old}}|oui)old] [(#GET{fakenews}|oui)noise]" [(#GET{mystere}|non)itemprop="event" itemscope itemtype="http://schema.org/Event"]>
         [(#GET{mystere}|non)<meta itemprop="startDate" content="[(#HORAIRE|=={oui}|?{#DATE_DEBUT|affdate{'c'}, #DATE_DEBUT|affdate{'Y-m-d'}})]"/>]
         <strong>
             <span itemprop="name" style="display:none">#NOM_SITE_SPIP</span>

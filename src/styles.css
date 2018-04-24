@@ -56,6 +56,7 @@ h3 {
 }
 .faute:hover:before {
     content: attr(data-alt);
+    cursor: inherit;
 }
 .hide {
     display: none;
@@ -117,12 +118,20 @@ h3 {
     position: absolute;
     left:16px;
 }
-.agenda .gate:checked ~ .noise {
+.agenda .gate[name="noise"]:checked ~ .noise {
     display: none;
+}
+.agenda .gate[name="old"]:checked ~ .old {
+    display: block;
 }
 .agenda .gate, .agenda .gate-label {
     float: right;
-    margin-bottom: 10px;
+}
+.agenda li:first-of-type {
+    margin-top: 10px;
+}
+.agenda .event.old {
+    display: none;
 }
 .tweet {
     margin-bottom: 10px;
