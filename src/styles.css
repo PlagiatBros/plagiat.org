@@ -56,7 +56,7 @@ h3 {
 }
 .faute:hover:before {
     content: attr(data-alt);
-    cursor: inherit;
+    cursor: text;
 }
 .hide {
     display: none;
