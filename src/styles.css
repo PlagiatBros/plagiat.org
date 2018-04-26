@@ -126,6 +126,7 @@ h3 {
 }
 .agenda .gate-label {
     user-select: none;
+    position: relative;
 }
 .agenda .gate-label:after {
     content:"";
@@ -138,8 +139,21 @@ h3 {
     margin-left: 6px;
     top:2px;
 }
-.agenda .gate:checked + .gate-label:after {
-    background: #333;
+.agenda .gate-label:before {
+    content:"";
+    width: 7px;
+    height: 3px;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    transform: rotate(-45deg);
+    position: absolute;
+    right: 0px;
+    top:5px;
+    display: none;
+    z-index: 1;
+}
+.agenda .gate:checked + .gate-label:before {
+    display: block;
 }
 
 .agenda .gate[name="noise"]:checked ~ .noise {
