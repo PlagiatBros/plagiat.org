@@ -124,6 +124,9 @@ h3 {
     z-index: -1;
     opacity: 0;
 }
+.agenda .gate-label {
+    user-select: none;
+}
 .agenda .gate-label:after {
     content:"";
     width: 6px;
@@ -136,7 +139,7 @@ h3 {
     top:2px;
 }
 .agenda .gate:checked + .gate-label:after {
-    background: #0088cc;
+    background: #333;
 }
 
 .agenda .gate[name="noise"]:checked ~ .noise {
