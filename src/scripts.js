@@ -8,6 +8,7 @@ window.onhashchange = function(){
 // display current section
 var navitems = document.querySelectorAll('.nav li a'),
     anchors = document.querySelectorAll('.anchor'),
+    positions = [],
     debounce
 
 function offset(element) {
@@ -22,11 +23,17 @@ function offset(element) {
     return y
 }
 
+function checkPositions() {
+    anchors.forEach(function(a, i){
+        positions[i] = offset(a)
+    })
+}
+
 function checkScroll() {
     var nearest, bestScore = Infinity
 
     anchors.forEach(function(a, i){
-        var y = offset(a) - document.documentElement.scrollTop,
+        var y = positions[i] - document.documentElement.scrollTop,
             score = Math.abs(y)
         if (score <= bestScore && y - window.innerHeight < 0) {
             bestScore = score
@@ -39,8 +46,14 @@ function checkScroll() {
     })
 }
 
-window.onscroll = checkScroll
 
+window.onscroll = checkScroll
+window.onload = checkPositions
+
+document.querySelectorAll('.gate').forEach(function(a){
+    a.addEventListener('change', function(){checkPositions()})
+})
 
 // init
+checkPositions()
 checkScroll()
