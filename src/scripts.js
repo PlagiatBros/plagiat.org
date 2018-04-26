@@ -10,13 +10,25 @@ var navitems = document.querySelectorAll('.nav li a'),
     anchors = document.querySelectorAll('.anchor'),
     debounce
 
+function offset(element) {
+    var y = 0
+    if (element) {
+        do {
+            if (!isNaN(element.offsetTop)) {
+                y += element.offsetTop - element.scrollTop
+            }
+        } while (element = element.offsetParent)
+    }
+    return y
+}
+
 function checkScroll() {
     var nearest, bestScore = Infinity
 
     anchors.forEach(function(a, i){
-        var y = a.getClientRects()[0].y,
+        var y = offset(a) - document.documentElement.scrollTop,
             score = Math.abs(y)
-        if (score <= bestScore && y -window.innerHeight < 0) {
+        if (score <= bestScore && y - window.innerHeight < 0) {
             bestScore = score
             nearest = a
         }
