@@ -141,14 +141,14 @@ h3 {
 }
 .agenda .gate-label:before {
     content:"";
-    width: 7px;
-    height: 3px;
+    width: 5px;
+    height: 2px;
     border-bottom: 2px solid black;
     border-left: 2px solid black;
     transform: rotate(-45deg);
     position: absolute;
-    right: 0px;
-    top:5px;
+    right: 1px;
+    top:6px;
     display: none;
     z-index: 1;
 }
