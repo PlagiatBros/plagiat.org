@@ -118,17 +118,35 @@ h3 {
     position: absolute;
     left:16px;
 }
+
+.agenda .gate {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+.agenda .gate-label:after {
+    content:"";
+    width: 6px;
+    height: 6px;
+    background: white;
+    border:2px solid white;
+    display: inline-block;
+    position: relative;
+    margin-left: 6px;
+    top:2px;
+}
+.agenda .gate:checked + .gate-label:after {
+    background: #0088cc;
+}
+
 .agenda .gate[name="noise"]:checked ~ .noise {
-    display: none;
+    display: none!important;
 }
 .agenda .gate[name="old"]:checked ~ .old {
     display: block;
 }
 .agenda .gate, .agenda .gate-label {
     float: right;
-}
-.agenda li:first-of-type {
-    margin-top: 10px;
 }
 .agenda .event.old {
     display: none;

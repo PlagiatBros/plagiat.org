@@ -1,11 +1,11 @@
 <ul class="agenda">
-    <input type="checkbox" class="gate" name="noise"/>
-    <div class="gate-label"><:agenda_noisegate:></div>
+    <input type="checkbox" class="gate" id="noise" name="noise"/>
+    <label class="gate-label" for="noise"><:agenda_noisegate:></label>
     <div class="clear"></div>
-    <input type="checkbox" class="gate" name="old"/>
-    <div class="gate-label"><:agenda_oldgate:></div>
+    <input type="checkbox" class="gate" id="old" name="old"/>
+    <label class="gate-label" for="old"><:agenda_oldgate:></label>
     <div class="clear"></div>
-    #SET{old, #ENV{old, '-6 months'}|strtotime}
+    #SET{old, #ENV{old, '-1 month'}|strtotime}
     #SET{hier, #VAL{'-1 day'}|strtotime}
 <BOUCLE_agenda(EVENEMENTS){par date_debut}>
     #SET{fakenews, ""}#SET{mystere, ""}
