@@ -126,7 +126,7 @@ img.onload = function(){
     canvas.height = this.height
     ctx.drawImage(img, 0, 0)
     for (var i = 0; i < 10; i++) {
-        glitches.push('url('+ glitch(canvas,3).toDataURL("image/jpeg") +')')
+        glitches.push('url('+ glitch(canvas,10).toDataURL("image/jpeg") +')')
     }
 }
 
