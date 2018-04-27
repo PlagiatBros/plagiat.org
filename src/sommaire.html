@@ -20,6 +20,8 @@
 </head>
 <body>
 
+<div id="background"></div>
+
 <BOUCLE_rubrique(RUBRIQUES){par num titre}{0, 1}{tout}>
 
 <div class="nav">
@@ -43,11 +45,15 @@
 
 </BOUCLE_rubrique>
 
-#SET{js, #INCLURE{#CHEMIN{scripts.js}|compacte}}
 <script>
     /* src: #CHEMIN{scripts.js} */
-    #GET{js}
+    [(#INCLURE{#CHEMIN{scripts.js}|compacte})]
+    window.BG = '[(#LOGO_SITE_SPIP|image_reduire{640, 0}|extraire_attribut{src})]'
 
+    /* src: #CHEMIN{glitch.js} */
+    var s = document.createElement('script')
+    s.src = '[(#CHEMIN{glitch.js}|compacte)]'
+    document.body.appendChild(s)
 </script>
 </body>
 </html>
