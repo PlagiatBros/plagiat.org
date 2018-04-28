@@ -3,7 +3,7 @@
 
 <BOUCLE_youtube(DATA){datapath items}{source json, #GET{json}}>
 
-<a class="media video" href="#URL" target="_blank" title="#VALEUR{snippet/title}">
+<a class="media video" href="#URL" target="_blank" title="[(#VALEUR{snippet/title}|texte_backend)]">
 [(#VALEUR{snippet/thumbnails/maxres/url}|sinon{#VALEUR{snippet/thumbnails/standard/url}}|sinon{#VALEUR{snippet/thumbnails/medium/url}}|image_reduire{518,0}|inserer_attribut{alt, #URL})]
 </a>
 
