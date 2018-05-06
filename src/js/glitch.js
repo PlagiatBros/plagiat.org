@@ -10,7 +10,7 @@ function getRandInt(min, max) {
     return (Math.floor(Math.random() * (max - min) + min))
 }
 
-function glitch(canvas, amount) {
+function glitch(canvas, slices, amount, horizontalOffset, colorOffset) {
 
     var
         // cache the width and height of the canvas locally
@@ -19,12 +19,14 @@ function glitch(canvas, amount) {
         // _len is an iterator limit, initially storing the number of slices
         // to create
         i, _len = amount || 6,
+        slices = slices || 6,
 
         // pick a random amount to offset the color channel
-        channelOffset = (getRandInt(-_len*2, _len*2) * w * + getRandInt(-_len, _len)) * 4,
+        colorOffset = colorOffset || _len,
+        channelOffset = (getRandInt(-colorOffset*2, colorOffset*2) * w * + getRandInt(-colorOffset, colorOffset)) * 4,
 
         // the maximum amount to offset a chunk of the image is a function of its width
-        maxOffset = _len * _len / 100 * w,
+        maxOffset = (horizontalOffset || _len) / 100 * w,
 
         // vars for the width and height of the chunk that gets offset
         chunkWidth, chunkHeight,
@@ -46,16 +48,16 @@ function glitch(canvas, amount) {
     srcData = tempCtx.getImageData(0, 0, w, h).data
 
     // randomly offset slices horizontally
-    for (i = 0; i < _len; i++) {
+    for (i = 0; i < slices; i++) {
 
         // pick a random y coordinate to slice at
         y = getRandInt(0, h)
 
         // pick a random height of the slice
-        chunkHeight = Math.min(getRandInt(1, h / 4), h - y)
+        chunkHeight = Math.min(getRandInt(1, h / slices), h - y)
 
         // pick a random horizontal distance to offset the slice
-        x = getRandInt(1, maxOffset)
+        x = getRandInt(-maxOffset, maxOffset)
         chunkWidth = w - x
 
         // draw the first chunk
@@ -87,54 +89,39 @@ function glitch(canvas, amount) {
         data[i+channelOffset] = srcData[i]
     }
 
-    // Make the image brighter by doubling the rgb values
-    for(i = 0; i < _len; i++) {
-        data[i++] *= 2
-        data[i++] *= 2
-        data[i++] *= 2
-    }
-
-    // TODO: The above loops are the most costly in this function, iterating
-    // over all the pixels in the image twice.
-    // It maybe possible to optimize this by combining both loops into one,
-    // and only processing every other line, as alternate lines are replaced
-    // with black in the 'scan lines' block belop
-
     // copy the tweaked ImageData back into the context
     tempCtx.putImageData(targetImageData, 0, 0)
-
-    // add scan lines
-    // tempCtx.fillStyle = "rgb(0,0,0)"
-    // for (i = 0; i < h; i += 2) {
-    //     tempCtx.fillRect (0, i, w, 1)
-    // }
 
     return tempCanvas
 
 }
 
-var img = new Image(),
-    background = document.getElementById('background'),
-    loaded = false,
-    canvas = document.createElement('canvas'),
-    ctx = canvas.getContext("2d"),
-    glitches = []
+var N_GLITCHES = 10,
+    N_SLICES = 6
 
-img.src = window.BG
-img.onload = function(){
-    canvas.width = this.width
-    canvas.height = this.height
-    ctx.drawImage(img, 0, 0)
-    for (var i = 0; i < 10; i++) {
-        glitches.push('url('+ glitch(canvas,10).toDataURL("image/jpeg") +')')
-    }
-}
+document.querySelectorAll('section').forEach(function(section, i){
 
-window.addEventListener('scroll', function(){
-    var r = Math.round(Math.random()*20)
-    if (r < 10) {
-        background.style.backgroundImage = glitches[r]
-    } else {
-        background.style.backgroundImage = ''
+    let container = section.getElementsByClassName('glitches')[0],
+        glitches = []
+
+    html2canvas(section, {backgroundColor: null, scale: 1, logging: false}).then(function(canvas) {
+        for (var i = 0; i < N_GLITCHES; i++) {
+            var glitched = glitch(canvas, Math.round(section.offsetHeight / window.innerHeight) * N_SLICES)
+            glitches.push(glitched)
+            container.appendChild(glitched)
+        }
+        glitchLoop()
+    })
+
+    function glitchLoop(){
+        let x = 0, px = 0
+        setInterval(function(){
+            x = Math.round(Math.random() * N_GLITCHES)
+            glitches[px % (glitches.length-1)].classList.remove('show')
+            if (Math.random() > 0.8) glitches[x % (glitches.length-1)].classList.add('show')
+            px = x
+        },50)
     }
+
+
 })

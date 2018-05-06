@@ -33,27 +33,35 @@
     </ul>
 </div>
 
-<h1>#TITRE</h1>
-
 <BOUCLE_articles(ARTICLES){id_rubrique}{par num titre}>
+<section>
+    [(#GLITCH|oui)<div class="glitches"></div>]
+    <div class="wrapper">
 
-<h2><a class="anchor" data-anchor="[(#COMPTEUR_BOUCLE|moins{1})]" id="[(#TITRE|textebrut|replace{' ',''})]"></a>#TITRE</h2>
+        [(#COMPTEUR_BOUCLE|=={1}|oui)<h1>#_rubrique:TITRE</h1>]
 
-#TEXTE
+        <h2><a class="anchor" data-anchor="[(#COMPTEUR_BOUCLE|moins{1})]" id="[(#TITRE|textebrut|replace{' ',''})]"></a>#TITRE</h2>
 
+        #TEXTE
+
+    </div>
+</section>
 </BOUCLE_articles>
 
 </BOUCLE_rubrique>
 
 <script>
     /* src: #CHEMIN{scripts.js} */
-    [(#INCLURE{#CHEMIN{scripts.js}|compacte})]
+    [(#INCLURE{#CHEMIN{js/scripts.js}|compacte})]
 [(#GLITCH|oui)
-    window.BG = '[(#LOGO_SITE_SPIP|image_reduire{640, 0}|extraire_attribut{src})]'
+
+    /* html2canvas */
+    [(#INCLURE{js/html2canvas.min.js})]
+
     /* src: #CHEMIN{glitch.js} */
-    var s = document.createElement('script')
-    s.src = '[(#CHEMIN{glitch.js}|compacte)]'
-    document.body.appendChild(s)
+    window.srcPath = '#CHEMIN{js}'
+    [(#INCLURE{#CHEMIN{js/glitch.js}|compacte})]
+
 ]
 </script>
 </body>

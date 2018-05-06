@@ -28,7 +28,7 @@
 [(#GET{video}|match{vimeo}|oui)
 #INCLURE{fond=modeles/vimeo, url=#GET{video}}]
 
-</div>
+</div>[(#DEBUG|oui)[(#VALEUR|print)]]
 ]</BOUCLE_twitter>
 
 <div class="tweet">

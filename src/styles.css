@@ -1,5 +1,4 @@
 body {
-    width:540px;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 12px;
     line-height: 16px;
@@ -17,9 +16,40 @@ body {
     background-size: 640px auto;
     background-position: center 40px;
     background-repeat: no-repeat;
-    z-index:-1;
+    z-index: -2;
     opacity: 0.05;
 }
+
+section {
+    position: relative;
+}
+
+section > .wrapper {
+    position: relative;
+    width:540px;
+    margin: 0 auto;
+}
+.glitches {
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    overflow: hidden;
+    opacity: 1;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+.glitches canvas {
+    display: none;
+    margin: 0;
+}
+.glitches canvas.show {
+    display: block;
+}
+
 a {
     color: #0088cc;
     text-decoration: none;
@@ -99,7 +129,7 @@ h3 {
     padding: 0 10px;
 }
 .agenda {
-    background: #000;
+    background-color: #000;
     color: #fff;
     margin-bottom: 10px;
     padding: 10px;
@@ -108,9 +138,17 @@ h3 {
 .agenda .past {
     opacity: 0.8;
 }
+.event .title {
+    font-weight: bold;
+    display: block;
+}
 .agenda .detail {
     padding-left: 24px;
     position: relative;
+    display: block;
+}
+.agenda .detail a {
+    color:inherit;
 }
 .agenda .detail:before {
     content:"//";

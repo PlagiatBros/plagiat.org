@@ -46,7 +46,7 @@ function checkScroll() {
     })
 }
 
-window.onload = checkPositions
+window.addEventListener('load', checkPositions)
 window.addEventListener('scroll', checkScroll)
 document.querySelectorAll('.gate').forEach(function(a){
     a.addEventListener('change', function(){checkPositions()})

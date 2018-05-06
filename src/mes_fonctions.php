@@ -1,5 +1,7 @@
 <?php
 
+    require 'api_keys.php';
+
     function filtre_minify_css($css) {
         $css = preg_replace('/\n/', '', $css);
         $css = preg_replace('/\s+/', ' ', $css);
@@ -50,10 +52,13 @@
 
         }
 
-        $media = $entities['media'];
-        for ($i=0; $i < sizeof($media); $i++) {
-
-
+        if (sizeof($media) == 0 && sizeof($urls) > 0 && !twitter_video('', $entities)) {
+            $url = $urls[0]['expanded_url'];
+            $html = file_get_contents($url);
+            preg_match('/property="og:image"\s+content="([^"]*)"/i', $html, $img);
+            if (sizeof($img) > 0) {
+                $texte .= '<a target="_blank" class="media" href="' . $url . '"><img src="' . $img[1] . '"/></a>';
+            }
         }
 
 
@@ -67,7 +72,7 @@
         $urls = $entities['urls'];
         for ($i=0; $i < sizeof($urls); $i++) {
 
-            if (preg_match("/(youtube\.com|youtu\.be|vimeo\.com)/", $urls[$i]['display_url'])) {
+            if (preg_match("/(youtube\.com|youtu\.be|vimeo\.com)/", $urls[$i]['expanded_url'])) {
 
                 $ret = $urls[$i]['expanded_url'];
 
@@ -124,9 +129,6 @@
 
     }
 
-    require "api_keys.php";
-
-
     function balise_VIMEO_PROXY_KEY($p) {
         $p->code = $GLOBALS['vimeo_proxy_key'];
         return $p;
@@ -137,6 +139,10 @@
     }
     function balise_SOUNDCLOUD_API_KEY($p) {
         $p->code = 'nocrash_' . $GLOBALS['soundcloud_api_key'];
+        return $p;
+    }
+    function balise_OPENGRAPH_API_KEY($p) {
+        $p->code = $GLOBALS['opengraph_api_key'];
         return $p;
     }
 
