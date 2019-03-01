@@ -21,6 +21,7 @@
 <body>
 
 <div id="background"></div>
+[(#GLITCH|oui)<div id="glitch"></div>]
 
 <BOUCLE_rubrique(RUBRIQUES){par num titre}{0, 1}{tout}>
 
@@ -33,10 +34,10 @@
     </ul>
 </div>
 
+<div id="main">
+
 <BOUCLE_articles(ARTICLES){id_rubrique}{par num titre}>
-<section>
-    [(#GLITCH|oui)<div class="glitches"></div>]
-    <div class="wrapper">
+<section class="wrapper">
 
         [(#COMPTEUR_BOUCLE|=={1}|oui)<h1>#_rubrique:TITRE</h1>]
 
@@ -44,15 +45,17 @@
 
         #TEXTE
 
-    </div>
 </section>
 </BOUCLE_articles>
 
 </BOUCLE_rubrique>
 
+</div>
+
 <script>
     /* src: #CHEMIN{scripts.js} */
-    [(#INCLURE{#CHEMIN{js/scripts.js}|compacte})]
+    [(#INCLURE{#CHEMIN{js/scripts.js}|compacte})
+    ]
 [(#GLITCH|oui)
 
     /* html2canvas */
