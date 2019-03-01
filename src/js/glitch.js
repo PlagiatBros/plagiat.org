@@ -97,31 +97,70 @@ function glitch(canvas, slices, amount, horizontalOffset, colorOffset) {
 }
 
 var N_GLITCHES = 10,
-    N_SLICES = 6
+    N_SLICES = 10
 
-document.querySelectorAll('section').forEach(function(section, i){
+var glitchTimeout,
+    glitchInterval,
+    container = document.getElementById('glitch'),
+    x = 0, i = 0,
+    glitches = [],
+    glitching = false,
+    glitchAmount = 0.08,
+    screenshot
 
-    let container = section.getElementsByClassName('glitches')[0],
-        glitches = []
+function waitForGlitch(){
+    disableGlitch()
+    glitchTimeout = setTimeout(function(){
+        enableGlitch()
+    },15000)
+}
+function enableGlitch(){
+    glitching = true
+    var main = document.getElementById('main')
+    html2canvas(main, {backgroundColor: null, scale: 1, logging: true}).then(function(canvas) {
+        if (!glitching) return
+        screenshot = document.createElement('canvas')
+        var ctx = screenshot.getContext('2d')
+        screenshot.width = main.offsetWidth
+        screenshot.height = window.innerHeight
+        ctx.drawImage(canvas, 0, document.documentElement.scrollTop, screenshot.width, screenshot.height, 0, 0, screenshot.width, screenshot.height)
 
-    html2canvas(section, {backgroundColor: null, scale: 1, logging: false}).then(function(canvas) {
         for (var i = 0; i < N_GLITCHES; i++) {
-            var glitched = glitch(canvas, Math.round(section.offsetHeight / window.innerHeight) * N_SLICES)
+            var glitched = glitch(screenshot, N_SLICES)
             glitches.push(glitched)
             container.appendChild(glitched)
         }
         glitchLoop()
     })
-
-    function glitchLoop(){
-        let x = 0, px = 0
-        setInterval(function(){
-            x = Math.round(Math.random() * N_GLITCHES)
-            glitches[px % (glitches.length-1)].classList.remove('show')
-            if (Math.random() > 0.8) glitches[x % (glitches.length-1)].classList.add('show')
-            px = x
-        },50)
+}
+function glitchLoop(){
+    glitchInterval = setInterval(function(){
+        glitches[x % (glitches.length-1)].classList.remove('show')
+        x = Math.round(Math.random() * N_GLITCHES)
+        if (Math.random() < glitchAmount) glitches[x % (glitches.length-1)].classList.add('show')
+        i++
+        if (i == 40) {
+            i = 0
+            var glitched = glitch(screenshot, N_SLICES)
+            var del = glitches[(x - 1) % (glitches.length-1)]
+            container.removeChild(del)
+            container.appendChild(glitched)
+            glitches[(x - 1) % (glitches.length-1)] = glitched
+        }
+    }, 50)
+}
+function disableGlitch(){
+    glitchTimeout = clearTimeout(glitchTimeout)
+    glitchInterval = clearInterval(glitchInterval)
+    if (glitching) {
+        glitching = false
+        container.innerHTML = ''
+        glitches = []
     }
+}
 
-
-})
+waitForGlitch()
+window.addEventListener('scroll', waitForGlitch)
+window.addEventListener('resize', waitForGlitch)
+document.addEventListener('mousemove', waitForGlitch)
+document.addEventListener('touchstart', waitForGlitch)

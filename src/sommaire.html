@@ -3,7 +3,7 @@
 #SET{page_url,#URL_SITE_SPIP|url_absolue}
 
 <!DOCTYPE html>
-<html lang="#LANG"[ class="(#HTML_CLASS|match{epk})"]>
+<html>
 <head>
     <meta charset="utf-8"/>
     <title>[(#NOM_SITE_SPIP|textebrut)] - [(#SLOGAN_SITE_SPIP|textebrut)]</title>
@@ -11,58 +11,32 @@
     <link rel="canonical" href="#GET{page_url}" />
     <meta name="description" content="[(#DESCRIPTIF_SITE_SPIP|textebrut)]" />
     <meta property="og:image" content="[(#LOGO_SITE_SPIP|image_recadre{'19:10', '+', 'center top', #ffffff}|extraire_attribut{src}|supprimer_timestamp|url_absolue)]"/>
-    #SET{css, #INCLURE{styles.css}|minify_css|replace{\$bg, #LOGO_SITE_SPIP|image_reduire{640, 0}|extraire_attribut{src}}}
-    <style>
-        /* src: #CHEMIN{styles.css} */
-        #GET{css}
-
-    </style>
+    <link rel="stylesheet" href="#URL_PAGE{styles.css}" />
 </head>
 <body>
 
-<div id="background"></div>
+<!-- <div id="background" style="background-image:url([(#CHEMIN{img/plagiat_gang_2018.png}|image_reduire{1920}|extraire_attribut{src})])"></div> -->
 
-<BOUCLE_rubrique(RUBRIQUES){par num titre}{0, 1}{tout}>
+<nav>
 
-<div class="nav">
-    <ul>
-        <li><a href="#">[plaʒia]</a></li>
-    <BOUCLE_nav(ARTICLES){id_rubrique}{par num titre}{1,10}>
-        <li><a href="#[(#TITRE|textebrut|replace{' ',''})]">[(#TITRE|textebrut)]</a></li>
-    </BOUCLE_nav>
-    </ul>
-</div>
+</nav>
 
-<BOUCLE_articles(ARTICLES){id_rubrique}{par num titre}>
-<section>
-    [(#GLITCH|oui)<div class="glitches"></div>]
-    <div class="wrapper">
 
-        [(#COMPTEUR_BOUCLE|=={1}|oui)<h1>#_rubrique:TITRE</h1>]
+<header>
+    <h1>#NOM_SITE_SPIP</h1>
+</header>
 
-        <h2><a class="anchor" data-anchor="[(#COMPTEUR_BOUCLE|moins{1})]" id="[(#TITRE|textebrut|replace{' ',''})]"></a>#TITRE</h2>
+<main>
 
-        #TEXTE
 
-    </div>
-</section>
-</BOUCLE_articles>
 
-</BOUCLE_rubrique>
 
-<script>
-    /* src: #CHEMIN{scripts.js} */
-    [(#INCLURE{#CHEMIN{js/scripts.js}|compacte})]
-[(#GLITCH|oui)
+</main>
 
-    /* html2canvas */
-    [(#INCLURE{js/html2canvas.min.js})]
+<aside>
 
-    /* src: #CHEMIN{glitch.js} */
-    window.srcPath = '#CHEMIN{js}'
-    [(#INCLURE{#CHEMIN{js/glitch.js}|compacte})]
+    </aside
 
-]
-</script>
+
 </body>
 </html>
