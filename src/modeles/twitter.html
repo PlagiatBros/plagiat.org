@@ -1,11 +1,11 @@
-<BOUCLE_twitter(DATA){source twitter, statuses/user_timeline?tweet_mode=extended}{0,20}>[(#VALEUR{in_reply_to_status_id}|non)
+<BOUCLE_twitter(DATA){source twitter, statuses/user_timeline?tweet_mode=extended&count=20}{0,20}>[(#VALEUR{in_reply_to_status_id}|non)
 <div  class="tweet">
 
 <div class="when">[(#VALEUR{created_at}|rfc2iso|affdate)]</div>
 
 #SET{texte, #VALEUR{full_text}
     |propre
-    |twitter_urls{#VALEUR{entities}}
+    |twitter_urls{#VALEUR}
     |liens_ouvrants
 }
 

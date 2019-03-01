@@ -1,5 +1,5 @@
 [(#REM)<!-- titre=Newsletter Plagiat -->]
-<BOUCLE_newsletter(NEWSLETTERS){id_newsletter}{statut?}>
+<BOUCLE_newsletter(NEWSLETTERS){id_newsletter}{tout}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -21,11 +21,26 @@
         pre {
             color: #444444;
         }
+        .date {
+            padding:0px 20px 20px;
+            text-align: right;
+            color: #999;
+        }
+        #EXTRA_CSS{}
+
     </style>
 </head>
 <body>
 
+[(#ENV{online}|oui)
+<div class="date"><em>[(#DATE|affdate{d/m/y})]</em></div>
+]
+
 [(#TEXTE*|propre|liens_ouvrants)]
+
+====
+
+[(#NOTES*|propre|liens_ouvrants)]
 
 ====
 
@@ -36,7 +51,9 @@ Plagiat est une faute d'ordre moral
 <a href="https://www.plagiat.org">www.plagiat.org</a>
 <a href="https://www.ammd.net">www.ammd.net</a>[(#ENV{online}|non)
 
+[(#ENV{online}|non)
 <a href="@url_unsubscribe@"><i>Clique isssci pour ne plus ressscevoir ce torchon</i></a>]
+]
 </pre>
 
 </body>

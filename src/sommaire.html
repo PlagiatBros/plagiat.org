@@ -3,7 +3,7 @@
 #SET{page_url,#URL_SITE_SPIP|url_absolue}
 
 <!DOCTYPE html>
-<html lang="#LANG"[ class="(#HTML_CLASS|match{epk})"]>
+<html>
 <head>
     <meta charset="utf-8"/>
     <title>[(#NOM_SITE_SPIP|textebrut)] - [(#SLOGAN_SITE_SPIP|textebrut)]</title>
@@ -37,7 +37,9 @@
 <div id="main">
 
 <BOUCLE_articles(ARTICLES){id_rubrique}{par num titre}>
-<section class="wrapper">
+<section>
+    [(#GLITCH|oui)<div class="glitches"></div>]
+    <div class="wrapper">
 
         [(#COMPTEUR_BOUCLE|=={1}|oui)<h1>#_rubrique:TITRE</h1>]
 
@@ -45,6 +47,7 @@
 
         #TEXTE
 
+    </div>
 </section>
 </BOUCLE_articles>
 

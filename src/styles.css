@@ -2,7 +2,7 @@ body {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 12px;
     line-height: 16px;
-    margin: 20px auto 50px;
+    margin: 0;
     overflow-y: scroll;
 }
 
@@ -19,35 +19,33 @@ body {
     z-index: -2;
     opacity: 0.05;
 }
-
-section {
-    position: relative;
-}
-
-section > .wrapper {
-    position: relative;
-    width:540px;
-    margin: 0 auto;
-}
-.glitches {
-    position: absolute;
+#glitch {
+    position: fixed;
     top:0;
     left:0;
     right:0;
     bottom:0;
+    z-index: 9;
     overflow: hidden;
-    opacity: 1;
-    z-index: 2;
     display: flex;
     justify-content: center;
     pointer-events: none;
 }
-.glitches canvas {
+#glitch canvas {
     display: none;
-    margin: 0;
+    margin: 0 auto;
 }
-.glitches canvas.show {
+#glitch canvas.show {
     display: block;
+}
+#main {
+    padding-top: 80px;
+    padding-bottom: 50px;
+}
+.wrapper {
+    position: relative;
+    width:540px;
+    margin: 0 auto;
 }
 
 a {
@@ -62,7 +60,7 @@ a:hover, a:active {
 h1 {
     font-family: "Liberation Mono", "Courrier New", mono;
     font-weight: normal;
-    margin-top:80px;
+    margin-top:0px;
     margin-bottom:40px;
 }
 h2 {
@@ -301,4 +299,16 @@ img {
 }
 #spip-admin{
     right:0;
+}
+
+
+.fat-btn {
+    background: #000;
+    color: #fff!important;
+    font-weight: bold;
+    border-color: #000;
+    cursor: pointer;
+    padding: 8px;
+    display: block;
+    text-align: center;
 }

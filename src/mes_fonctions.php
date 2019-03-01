@@ -1,5 +1,12 @@
 <?php
 
+    $GLOBALS['flag_preserver'] = true;
+    $GLOBALS['puce'] = '-';
+    $GLOBALS['class_spip_plus'] = '';
+    $GLOBALS['ligne_horizontale'] = '<hr/>';
+    $GLOBALS['debut_intertitre'] = '<h3>';
+    $GLOBALS['fin_intertitre'] = '</h3>';
+
     require 'api_keys.php';
 
     function filtre_minify_css($css) {
@@ -14,7 +21,10 @@
         return $css;
     }
 
-    function filtre_twitter_urls($texte, $entities) {
+    function filtre_twitter_urls($texte, $data) {
+
+        $entities = $data['entities'];
+        $ext_entities = $data['extended_entities'];
 
         $texte = str_replace('<br class=\'autobr\' />', '', $texte);
 
@@ -35,12 +45,13 @@
         }
 
 
-        $media = $entities['media'];
+        $media = $ext_entities['media'];
         for ($i=0; $i < sizeof($media); $i++) {
-
-            $texte = str_replace($media[$i]['url'], '', $texte);
-            $texte .= '<a target="_blank" class="media" href="' . $media[$i]['expanded_url'] . '"><img src="' . $media[$i]['media_url_https'] . '"/></a>';
-
+//            if (!$data['quoted_status_id_str'] || strpos($media[$i]['expanded_url'], $data['quoted_status_id_str']) === false) {
+                $texte = str_replace($media[$i]['url'], '', $texte);
+                $class = preg_match("/animated_gif|video/", $media[$i]['type']) ? " video" : "";
+                $texte .= '<a target="_blank" class="media' . $class . '" href="' . $media[$i]['expanded_url'] . '"><img src="' . $media[$i]['media_url_https'] . '"/></a>';
+//            }video
         }
 
 
@@ -52,13 +63,15 @@
 
         }
 
-        if (sizeof($media) == 0 && sizeof($urls) > 0 && !twitter_video('', $entities)) {
+        if (sizeof($media) == 0 && sizeof($urls) > 0 && !twitter_video('', $entities) && !$data['is_quote_status']) {
             $url = $urls[0]['expanded_url'];
-            $html = file_get_contents($url);
-            preg_match('/property="og:image"\s+content="([^"]*)"/i', $html, $img);
-            if (sizeof($img) > 0) {
-                $texte .= '<a target="_blank" class="media" href="' . $url . '"><img src="' . $img[1] . '"/></a>';
-            }
+//            if (!$data['quoted_status_id_str'] || strpos($url, $data['quoted_status_id_str']) === false) {
+                $html = file_get_contents($url);
+                preg_match('/property="og:image"\s+content="([^"]*)"/i', $html, $img);
+                if (sizeof($img) > 0) {
+                    $texte .= '<a target="_blank" class="media" href="' . $url . '"><img src="' . $img[1] . '"/></a>';
+                }
+//            }
         }
 
 
