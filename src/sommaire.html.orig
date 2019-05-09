@@ -1,0 +1,69 @@
+#SET{description,#DESCRIPTIF_SITE_SPIP|textebrut}
+#SET{image,#LOGO_SITE_SPIP|image_reduire{640}|image_recadre{16:9,'-'}|extraire_attribut{src}|url_absolue}
+#SET{page_url,#URL_SITE_SPIP|url_absolue}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>[(#NOM_SITE_SPIP|textebrut)] - [(#SLOGAN_SITE_SPIP|textebrut)]</title>
+    <link rel="shortcut icon" href="#CHEMIN{favicon.png}" />
+    <link rel="canonical" href="#GET{page_url}" />
+    <meta name="description" content="[(#DESCRIPTIF_SITE_SPIP|textebrut)]" />
+    <meta property="og:image" content="[(#LOGO_SITE_SPIP|image_recadre{'19:10', '+', 'center top', #ffffff}|extraire_attribut{src}|supprimer_timestamp|url_absolue)]"/>
+    <link rel="stylesheet" href="#URL_PAGE{styles.css}" />
+</head>
+<body>
+
+<<<<<<< HEAD
+<div id="background"></div>
+[(#GLITCH|oui)<div id="glitch"></div>]
+=======
+<!-- <div id="background" style="background-image:url([(#CHEMIN{img/plagiat_gang_2018.png}|image_reduire{1920}|extraire_attribut{src})])"></div> -->
+
+<nav>
+>>>>>>> 83c554904e531c3ac310e66438410a0f608efef9
+
+</nav>
+
+
+<<<<<<< HEAD
+<div id="main">
+
+<BOUCLE_articles(ARTICLES){id_rubrique}{par num titre}>
+<section class="wrapper">
+=======
+<header>
+    <h1>#NOM_SITE_SPIP</h1>
+</header>
+>>>>>>> 83c554904e531c3ac310e66438410a0f608efef9
+
+<main>
+
+
+
+<<<<<<< HEAD
+</section>
+</BOUCLE_articles>
+=======
+>>>>>>> 83c554904e531c3ac310e66438410a0f608efef9
+
+</main>
+
+<<<<<<< HEAD
+</div>
+
+<script>
+    /* src: #CHEMIN{scripts.js} */
+    [(#INCLURE{#CHEMIN{js/scripts.js}|compacte})
+    ]
+[(#GLITCH|oui)
+=======
+<aside>
+>>>>>>> 83c554904e531c3ac310e66438410a0f608efef9
+
+    </aside
+
+
+</body>
+</html>

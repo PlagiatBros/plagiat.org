@@ -1,0 +1,113 @@
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique=3}><BOUCLE_article(ARTICLES){id_article=#ID_ARTICLE}><!DOCTYPE html>
+<html lang="#LANG">
+<head>
+    <meta charset="utf-8"/>
+    <title>[(#TITRE|textebrut)] - [(#_rubrique:TITRE|textebrut)] - [(#NOM_SITE_SPIP|textebrut)]</title>
+    <link rel="shortcut icon" href="#CHEMIN{fistule/favicon.ico}" />
+    <link rel="canonical" href="#URL_ARTICLE" />
+
+    <meta name="description" content="[(#DESCRIPTIF|textebrut)]" />
+    <meta property="og:image" content="[(#LOGO_ARTICLE|sinon{#LOGO_SITE_SPIP}|image_recadre{'19:10', '+', 'center top', #ffffff}|extraire_attribut{src}|supprimer_timestamp|url_absolue)]"/>
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="[(#TITRE|textebrut)] - [(#_rubrique:TITRE|textebrut)] - [(#NOM_SITE_SPIP|textebrut)]">
+    <meta name="twitter:description" content="[(#DESCRIPTIF|textebrut)]">
+
+    #SET{css1, #INCLURE{styles.css}|minify_css}
+    #SET{css2, #INCLURE{fistule/styles.css}|minify_css}
+    <style>
+        /* src: #CHEMIN{styles.css} */
+        #GET{css1}
+        /* src: #CHEMIN{fistule/styles.css} */
+        #GET{css2}
+
+    </style>
+</head>
+<body>
+
+<div id="glitch"></div>
+
+<div id="header">
+    <img src="#CHEMIN{fistule/logo.png}" height="26px"/>
+    <span>fistule</span>
+</div>
+
+<div id="main">
+
+    <div id="content" class="card">
+        <div class="title main-title content align-center">
+            <h1>#TITRE</h1>
+            <p>#DESCRIPTIF</p>
+        </div>
+
+        <div class="content">
+
+
+            #TEXTE
+
+
+        </div>
+
+    </div>
+
+    <div id="sidebar">
+        <div id="goal" class="card">
+            <div class="content">
+                <div id="egg">
+                    <img src="#CHEMIN{fistule/egg.png}" width="100%"/>
+                </div>
+                <div class="amount accent">
+                    0,00 €
+                </div>
+                <p>collectés sur un objectif de <b>[(#VAL{0}|rand{100}|mult{0.01})] €</b></p>
+            </div>
+
+            <div class="content middle-title align-center">
+                <b>[(#VAL{20}|rand{128})] secondes restantes !</b>
+            </div>
+
+
+
+            <div class="content">
+                <div id="button">
+                    Participer
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <div class="title content align-center">
+                <b>Contreparties</b>
+            </div>
+            <div id="contreparties-content" class="content">
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    /* src: #CHEMIN{fistule/scripts.js} */
+    [(#INCLURE{#CHEMIN{fistule/scripts.js}|compacte})
+    ]
+    var counterparts = document.getElementById('contreparties'),
+        placeholder = document.getElementById('contreparties-content')
+
+    counterparts.parentNode.removeChild(counterparts)
+    placeholder.innerHTML = counterparts.innerHTML
+
+    /* html2canvas */
+    [(#INCLURE{js/html2canvas.min.js})]
+
+    /* src: #CHEMIN{glitch.js} */
+    window.srcPath = '#CHEMIN{js}'
+    [(#INCLURE{#CHEMIN{js/glitch.js}|compacte})]
+
+</script>
+</body>
+</html>
+</BOUCLE_article>
+</BOUCLE_rubrique>
