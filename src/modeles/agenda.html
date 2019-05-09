@@ -14,8 +14,8 @@
         [(#GET{mystere}|non)<meta itemprop="startDate" content="[(#HORAIRE|=={oui}|?{#DATE_DEBUT|affdate{'c'}, #DATE_DEBUT|affdate{'Y-m-d'}})]"/>]
         <span class="title">
             <span itemprop="name" style="display:none">#NOM_SITE_SPIP</span>
-            [(#GET{mystere}|non)
-                <span>[(#DATE_DEBUT|affdate{'d/m'})][(#HORAIRE|=={oui}|oui) | [(#DATE_DEBUT|affdate{'H\Hi'})]]</span><span itemprop="location" itemscope itemtype="http://schema.org/Place">
+            [(#GET{mystere}|non)#SET{format, 'd/m'}[(#DATE_DEBUT|annee|!={#ENV{date}|annee}|oui)#SET{format, 'd/m/y'}]
+                <span>[(#DATE_DEBUT|affdate{#GET{format}})][(#HORAIRE|=={oui}|oui) | [(#DATE_DEBUT|affdate{'H\Hi'})]]</span><span itemprop="location" itemscope itemtype="http://schema.org/Place">
             ][(#GET{mystere}|oui)
                 <span>??/??</span>
             ]
