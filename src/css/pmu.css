@@ -1,0 +1,17 @@
+body {
+ background: #00A01E!important;
+ color:#fff;
+}
+#background {
+background-image:url(https://plagiat.org/IMG/png/pmuypique.png);
+opacity: 0.15;
+}
+.nav {
+    background: #fff;
+}
+.nav * {
+    color: #00A01E!important;
+}
+a {
+    color: orange;
+}

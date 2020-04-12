@@ -1,0 +1,22 @@
+body {
+    background: #fff;
+}
+
+
+#background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-position: right center;
+    background-size: cover;
+    opacity: .25;
+}
+
+h1 {
+    font-family: freemono;
+    font-weight: bold;
+}

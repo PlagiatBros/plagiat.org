@@ -1,0 +1,2 @@
+#HTTP_HEADER{Content-type:text/javascript;}#SET{json, #VAL{http://softrains.fr/vimeo-proxy.php}|parametre_url{key, #VIMEO_PROXY_KEY}|parametre_url{url, #URL}|replace{&amp;,&}}
+<BOUCLE_vimeo(DATA){source json, #GET{json}}>[[(#VALEUR|json_encode)]]</BOUCLE_vimeo>

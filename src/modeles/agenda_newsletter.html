@@ -1,0 +1,22 @@
+<div class="agenda" style="border-bottom: 1px dashed #000;border-top: 1px dashed #000; padding: 20px 0">
+    #SET{old, #ENV{old, '-1 month'}|strtotime}
+    #SET{hier, #VAL{'-1 day'}|strtotime}
+<BOUCLE_agenda(EVENEMENTS){par date_debut}{date_debut >= #DEBUT}{date_debut < #FIN}>
+    #SET{fakenews, ""}#SET{mystere, ""}
+    <BOUCLE_tags(MOTS){id_evenement}>[(#ID_MOT|=={1}|oui)#SET{fakenews, oui}][(#ID_MOT|=={2}|oui)#SET{mystere, oui}]</BOUCLE_tags>
+    <div>
+        <span class="title" style="font-weight:bold;">
+            <span itemprop="name" style="display:none">#NOM_SITE_SPIP</span>
+            [(#GET{mystere}|non)#SET{format, 'd/m'}[(#DATE_DEBUT|annee|!={#ENV{date}|annee}|oui)#SET{format, 'd/m/y'}]
+                <span>[(#DATE_DEBUT|affdate{#GET{format}})][(#HORAIRE|=={oui}|oui) | [(#DATE_DEBUT|affdate{'H\Hi'})]]</span><span itemprop="location" itemscope itemtype="http://schema.org/Place">
+            ][(#GET{mystere}|oui)
+                <span>??/??</span>
+            ]
+            @ <span itemprop="address">#TITRE</span>[(#GET{mystere}|non)</span>]
+        </span>
+        [<div style="padding-left: 20px;">//&nbsp;
+        <span class="detail">[(#LIEN_URL|oui)<a href="#LIEN_URL" target="_blank">](#TEXTE|sinon{#LIEN_URL}|PtoBR)[(#LIEN_URL|oui)</a>]</span>
+        </div>]
+    </div>
+</BOUCLE_agenda>
+</div>

@@ -1,0 +1,18 @@
+#SET{url, #ENV{args/url}}
+
+<BOUCLE_img(DOCUMENTS){id_document=#ID_DOCUMENT}>
+
+[(#GET{url}|?{
+    <a class="media" href="[(#GET{url})]" target="_blank">
+    ,
+    <div class="media">
+})]
+
+[(#FICHIER|image_reduire{800,0}|embarque_fichier|inserer_attribut{alt, #GET{url}|sinon{#URL_DOCUMENT}})]
+
+[(#GET{url}|?{
+    </a>
+    ,
+    </div>
+})]
+</BOUCLE_img>

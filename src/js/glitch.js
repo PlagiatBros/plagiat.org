@@ -105,14 +105,14 @@ var glitchTimeout,
     x = 0, i = 0,
     glitches = [],
     glitching = false,
-    glitchAmount = 0.08,
+    glitchAmount = 0.18,
     screenshot
 
 function waitForGlitch(){
     disableGlitch()
     glitchTimeout = setTimeout(function(){
         enableGlitch()
-    },15000)
+    },10000)
 }
 function enableGlitch(){
     glitching = true

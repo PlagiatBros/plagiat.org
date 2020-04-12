@@ -1,0 +1,168 @@
+<BOUCLE_rubrique(RUBRIQUES){id_rurique=#ID_RUBRIQUE}>
+<BOUCLE_article(ARTICLES){id_article=#ID_ARTICLE}>
+#SET{description,#DESCRIPTIF_SITE_SPIP|textebrut}
+#SET{image,#LOGO_SITE_SPIP|image_reduire{640}|image_recadre{16:9,'-'}|extraire_attribut{src}|url_absolue}
+#SET{page_url,#URL_SITE_SPIP|url_absolue}
+
+<!DOCTYPE html>
+<html lang="#LANG">
+<head>
+    <meta charset="utf-8"/>
+    <title>[(#TITRE|textebrut)] - [(#_rubrique:TITRE|textebrut)]</title>
+    <link rel="shortcut icon" href="#CHEMIN{fistule/favicon.png}" />
+    <link rel="canonical" href="#GET{page_url}" />
+    <meta name="description" content="[(#TEXTE|textebrut|couper{300})]" />
+    <meta property="og:image" content="[(#LOGO_ARTICLE|image_recadre{'19:10', '+', 'center top', #ffffff}|extraire_attribut{src}|supprimer_timestamp|url_absolue)]"/>
+    #SET{css, #INCLURE{fistule/styles.css}|minify_css}
+    <style>
+        /* src: #CHEMIN{styles.css} */
+        #GET{css}
+
+    </style>
+</head>
+<body>
+
+
+<div id="header">
+    <img src="fistule-logo.png" height="26px"/>
+    <span>fistule</span>
+</div>
+
+<div id="main">
+
+    <div id="content" class="card">
+        <div class="title content align-center">
+            <h1>Plagiat, le Clip !</h1>
+            <p>Aide les Plagiat Brothers à réaliser leur premier clip</p>
+        </div>
+
+        <div class="content">
+
+            <a class="vimeo" href="#">
+                <img src="img.jpg" width="100%"/>
+            </a>
+
+        </div>
+
+
+        <div class="content story-title">
+            <b>À propos du projet</b>
+        </div>
+
+        <div class="content">
+            <p>
+                Plagiat sortira un clip en décembre, un clip de hip hop.
+            </p>
+        </div>
+
+
+        <div class="content story-title">
+            <b>À quoi servira le financement ?</b>
+        </div>
+
+
+        <div class="content">
+            <p>
+                À rien !
+            </p>
+        </div>
+
+
+        <div class="content story-title">
+            <b>À propos des porteurs du projets</b>
+        </div>
+
+        <div class="content">
+            <p>
+                De quoi ?
+            </p>
+        </div>
+
+
+
+    </div>
+
+    <div id="sidebar">
+        <div id="goal" class="card">
+            <div class="content">
+                <div id="egg">
+                    <img src="egg.png" width="100%"/>
+                </div>
+                <h1 class="accent">
+                    0,00 €
+                </h1>
+                <p>collectés sur un objectif de <b>0 €</b></p>
+            </div>
+
+            <div class="content middle-title align-center">
+                <b>27 secondes restantes !</b>
+            </div>
+
+
+
+            <div class="content">
+                <div id="button">
+                    Participer
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <div class="title content align-center">
+                <h3>
+                    Contreparties
+                </h3>
+            </div>
+            <div class="good content">
+                <h4 class="accent">
+                    0 € ou moins
+                </h4>
+                <p> - le clip, sur vimeo, le jour de sa sortie</p>
+            </div>
+            <hr/>
+            <div class="good content">
+                <h4 class="accent">
+                    0,01 € ou plus
+                </h4>
+                <p>
+                    - le clip, sur vimeo, le jour de sa sortie<br/>
+                    - un bon d'achat de 2 centimes d'euros valable 17 minutes dans tous nos magasins partenaires
+                </p>
+            </div>
+            <hr/>
+            <div class="good content">
+                <h4 class="accent">
+                    0,10 € ou plus
+                </h4>
+                <p>
+                    - toutes les contreparties précédentes<br/>
+                    - un abonnement gratuit et illimité à une newsletter de qualité¹
+                </p>
+            </div>
+            <hr/>
+            <div class="good content">
+                <h4 class="accent">
+                    500 €
+                </h4>
+                <p>
+                    - toutes les contreparties précédentes<br/>
+                    - un concert, où tu veux
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    /* src: #CHEMIN{fistule/scripts.js} */
+    [(#INCLURE{#CHEMIN{fistule/scripts.js}|compacte})
+    ]
+
+</script>
+</body>
+</html>
+</BOUCLE_article>
+</BOUCLE_rubrique>

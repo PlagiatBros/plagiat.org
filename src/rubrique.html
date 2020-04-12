@@ -1,3 +1,5 @@
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}>
+
 #SET{description,#DESCRIPTIF_SITE_SPIP|textebrut}
 #SET{image,#LOGO_SITE_SPIP|image_reduire{640}|image_recadre{16:9,'-'}|extraire_attribut{src}|url_absolue}
 #SET{page_url,#URL_SITE_SPIP|url_absolue}
@@ -12,31 +14,20 @@
     <meta name="description" content="[(#DESCRIPTIF_SITE_SPIP|textebrut)]" />
     <meta property="og:image" content="[(#LOGO_SITE_SPIP|image_recadre{'19:10', '+', 'center top', #ffffff}|extraire_attribut{src}|supprimer_timestamp|url_absolue)]"/>
     #SET{css, #INCLURE{styles.css}|minify_css|replace{\$bg, #LOGO_SITE_SPIP|image_reduire{640, 0}|extraire_attribut{src}}}
-    [(#RAPIDO|oui)#SET{pmucss, #INCLURE{css/pmu.css}|minify_css}]
     <style>
         /* src: #CHEMIN{styles.css} */
         #GET{css}
-
-        [(#RAPIDO|oui)#GET{pmucss}]
-
     </style>
 </head>
 <body>
 
 <div id="background"></div>
-#SET{mainrubid, 1}
-[(#RAPIDO|oui)
-<div id="glitch"></div>
-#SET{mainrubid, 7}
-]
 
-
-<BOUCLE_rubrique(RUBRIQUES){id_rubrique=#GET{mainrubid}}>
 
 <div class="nav">
     <ul>
-        <li><a href="#">[plaʒia]</a></li>
-    <BOUCLE_nav(ARTICLES){id_rubrique}{par num titre}{1,10}>
+        <li><a href="#">#TITRE</a></li>
+    <BOUCLE_nav(ARTICLES){id_rubrique}{par num titre}{0,10}>
         <li><a href="#[(#TITRE|textebrut|replace{' ',''})]">[(#TITRE|textebrut)]</a></li>
     </BOUCLE_nav>
     </ul>
@@ -44,12 +35,16 @@
 
 <div id="main">
 
-<BOUCLE_articles(ARTICLES){id_rubrique}{par num titre}>
 <section>
-    [(#RAPIDO|oui)<div class="glitches"></div>]
     <div class="wrapper">
+        <a href="#URL_SITE_SPIP">&lt;-- retour à plagiat.org</a>
+    </div>
+</section>
 
-        [(#COMPTEUR_BOUCLE|=={1}|oui)<h1>#_rubrique:TITRE</h1>]
+<BOUCLE_art(ARTICLES){id_rubrique}{par num titre}{0,10}>
+
+<section>
+    <div class="wrapper">
 
         <h2><a class="anchor" data-anchor="[(#COMPTEUR_BOUCLE|moins{1})]" id="[(#TITRE|textebrut|replace{' ',''})]"></a>#TITRE</h2>
 
@@ -57,32 +52,16 @@
 
     </div>
 </section>
-</BOUCLE_articles>
 
-</BOUCLE_rubrique>
+</BOUCLE_art>
 
 
 </div>
 
 <script>
     /* src: #CHEMIN{scripts.js} */
-    [(#INCLURE{#CHEMIN{js/scripts.js}|compacte})
-    ]
-[(#RAPIDO|oui)
-
-    var rframe = document.getElementById('rapidoframe'),
-        start = parseInt(Math.random()*540)
-        url = 'https://videos.domainepublic.net/videos/embed/9a13515c-6a94-4e0d-a273-78e61be2d4f3?loop=1&autoplay=1&muted=1&title=0&warningTitle=0&controls=0&start=' + start + 's'
-    rframe.src = url
-
-    /* html2canvas */
-    [(#INCLURE{js/html2canvas.min.js})]
-
-    /* src: #CHEMIN{glitch.js} */
-    window.srcPath = '#CHEMIN{js}'
-    [(#INCLURE{#CHEMIN{js/glitch.js}|compacte})]
-
-]
+    [(#INCLURE{#CHEMIN{js/scripts.js}|compacte})]
 </script>
 </body>
 </html>
+</BOUCLE_rubrique>
