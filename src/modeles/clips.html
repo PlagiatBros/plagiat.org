@@ -1,0 +1,12 @@
+#SET{base, https://videos.domainepublic.net}
+<BOUCLE_peertube(DATA){source json, #GET{base}/api/v1/accounts/plagiatbros/videos}{datapath data}>
+[(#VALEUR{name}|match{OFFICIAL}|oui)
+#INCLURE{
+    fond=modeles/_video,
+    uuid=#VALEUR{uuid},
+    thumb=#GET{base}#VALEUR{previewPath},
+    url=#GET{base}/videos/watch/#VALEUR{uuid},
+    title=#VALEUR{name}
+}
+]
+</BOUCLE_peertube>

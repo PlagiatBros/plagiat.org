@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <BOUCLE_meta(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}{tout}{lang_select=non}>
+    <title>#TITRE - #NOM_SITE_SPIP</title>
+    <meta name="description" content="[(#DESCRIPTION|sinon{#DESCRIPTIF_SITE_SPIP}|textebrut)]" />
+    <meta property="og:image" content="[(#LOGO_RUBRIQUE|sinon{#LOGO_SITE_SPIP}|image_reduire{640}|image_recadre{16:9,'-'}|extraire_attribut{src}|url_absolue)]"/>
+    <link rel="canonical" href="[(#URL_RUBRIQUE|url_absolue)]" />
+    </BOUCLE_meta>
+    <link rel="shortcut icon" href="#CHEMIN{favicon.png}" />
+    <style>
+        /* src: #CHEMIN{css/styles.css} */
+        [(#INCLURE{css/styles.css}|minify_css)]
+        /* */
+        main:before {
+            content: "";
+            position: fixed;
+            top:0;
+            left:0;
+            width: 100%;
+            height: 100%;
+            background-image:url([(#LOGO_SITE_SPIP|image_reduire{640, 0}|extraire_attribut{src})]);
+            background-size: 640px auto;
+            background-position: center 40px;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    [(#LANG|=={en}|oui)#SET{lang, en}]
+    <ul class="wrapper">
+        <BOUCLE_nav(RUBRIQUES){id_parent=#ID_SECTEUR}{tout}{par num titre}{lang_select=non}>
+            <li><a class="text-center[ (#EXPOSE|oui)on]" href="[(#COMPTEUR_BOUCLE|=={1}|?{#URL_SITE_SPIP,#URL_RUBRIQUE}|parametre_url{lang,#GET{lang}})]">#TITRE</a></li>
+        </BOUCLE_nav>
+            <li>
+                <form action="#SELF" method="get">
+                    <label for="lang" class="hidden">[(#LANG|=={en}|?{'Language', 'Langue'})]</label>
+                    <select id="lang" name="lang" onchange="if (this.value === 'fr') {window.location = '[(#SELF|parametre_url{lang, ''})]'} else this.form.submit()">
+                        <option value="fr">fr</option>
+                        <option value="en" [(#LANG|=={en}|oui)selected]>en</option>
+                    </select>
+                    <input id="lang-submit" type="submit" value="ok" class="hidden">
+                    <noscript><style>#lang-submit{display:inline-block}</style></noscript>
+                </form>
+            </li>
+    </ul>
+</nav>
+<main>
+<div class="wrapper">

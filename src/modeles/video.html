@@ -1,0 +1,14 @@
+#SET{base, https://videos.domainepublic.net}
+#SET{data, #ARRAY}
+<BOUCLE_peertube(DATA){source json, #GET{base}/api/v1/videos/#ENV{args/id}}>
+[(#SET{data,#GET{data}|array_merge{#ARRAY{#KEY, #VALEUR}}})]
+</BOUCLE_peertube>
+
+#INCLURE{
+    fond=modeles/_video,
+    uuid=#GET{data}|table_valeur{uuid},
+    thumb=#GET{base}#GET{data}|table_valeur{previewPath},
+    url=#GET{base}/videos/watch/#GET{data}|table_valeur{uuid},
+    title=#GET{data}|table_valeur{name}
+}
+</BOUCLE_peertube>

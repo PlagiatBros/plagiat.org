@@ -1,12 +1,14 @@
 <ul class="agenda">
+
     <input type="checkbox" class="gate" id="noise" name="noise"/>
-    <label class="gate-label" for="noise"><:agenda_noisegate:></label>
-    <div class="clear"></div>
+    <label class="gate-label" for="noise"><:agenda_noisegate:></label><br/>
     <input type="checkbox" class="gate" id="old" name="old"/>
     <label class="gate-label" for="old"><:agenda_oldgate:></label>
     <div class="clear"></div>
-    #SET{old, #ENV{old, '-1 month'}|strtotime}
+
+    #SET{old, #ENV{old, '-7 day'}|strtotime}
     #SET{hier, #VAL{'-1 day'}|strtotime}
+
 <BOUCLE_agenda(EVENEMENTS){par date_debut}>
     #SET{fakenews, ""}#SET{mystere, ""}
     <BOUCLE_tags(MOTS){id_evenement}>[(#ID_MOT|=={1}|oui)#SET{fakenews, oui}][(#ID_MOT|=={2}|oui)#SET{mystere, oui}]</BOUCLE_tags>
@@ -24,4 +26,5 @@
         [<span class="detail">[(#LIEN_URL|oui)<a href="#LIEN_URL" target="_blank">](#TEXTE|sinon{#LIEN_URL}|PtoBR)[(#LIEN_URL|oui)</a>]</span>]
     </li>
 </BOUCLE_agenda>
+
 </ul>

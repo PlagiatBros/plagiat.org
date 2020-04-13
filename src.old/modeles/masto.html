@@ -1,0 +1,56 @@
+#SET{bros, #ARRAY{nano,124288,alain,273131,plagiat,120928,fleurymichto,121015,missy,124172}}
+
+#SET{accountid, #ID}
+
+[(#BRO|oui)
+#SET{accountid, #GET{bros}|table_valeur{#BRO,120928}}
+]
+
+<BOUCLE_masto(DATA){source Mastodon, #VAL{accounts/#GET{accountid}/statuses?exclude_replies=1&tagged=#STORY}}{0,20}{si #ID_RUBRIQUE|!={8}|ou{#BRO|oui}}>
+
+<div class="tweet">
+
+<a class="when" href="#VALEUR{url}">[(#VALEUR{created_at}|rfc2iso|affdate)]</a>
+
+#VALEUR{content}
+
+<BOUCLE_media(POUR){tableau #VALEUR{media_attachments}}{0, 1}>
+[(#VALEUR{type}|=={image}|oui)
+<a class="media" href="#VALEUR{url}"><img src="[(#VALEUR{url}|image_reduire{518,0}|extraire_attribut{src})]"/></a>
+]
+[(#VALEUR{type}|match{gifv|video}|oui)
+<a class="media video" href="#VALEUR{url}"><img src="[(#VALEUR{preview_url}|image_reduire{518,0}|extraire_attribut{src})]"/></a>
+]
+</BOUCLE_media>
+[(#VALEUR{card/type}|=={image}|oui)
+<a class="media" href="#VALEUR{card/url}"><img src="[(#VALEUR{card/url}|image_reduire{518,0}|extraire_attribut{src})]"/></a>
+]
+
+[(#VALEUR{card/type}|match{gifv|video}|oui)
+<a class="media video" href="#VALEUR{card/url}"><img src="[(#VALEUR{card/image}|sinon{#CHEMIN{src/img/thumb.png}}|image_reduire{518,0}|extraire_attribut{src})]"/></a>
+]
+<//B_media>
+
+</div>[(#DEBUG|oui)[(#VALEUR|print)]]
+
+
+</BOUCLE_masto>
+
+[(#STORY|non)
+
+<div class="tweet">
+    <center><a href="https://framapiaf.org/@PlagiatBros">PLUS DE CLICS</a></center>
+</div>
+
+<div class="tweet">
+    <center><a href="https://twitter.com/PlagiatBros">OOOLD</a></center>
+</div>
+
+]
+</B_masto>
+
+<div class="tweet">
+    <center>Aucun résultat</center>
+</div>
+
+<//B_masto>

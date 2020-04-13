@@ -1,0 +1,355 @@
+/* RESET */
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* FONT */
+
+html {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 400;
+  overflow-y: scroll;
+}
+
+
+/* TYPOGRAPHY */
+
+iframe {
+    margin-top: 1rem;
+    display: block;
+}
+
+p {
+    margin-top: 1rem;
+}
+
+h1, h2, h3 {
+    font-family: "Liberation Mono", "Courrier New", mono;
+}
+
+h1 {
+    font-weight: normal;
+    margin-top:2rem;
+}
+
+h2 {
+    font-weight: normal;
+    margin-top:2rem;
+    position: relative;
+}
+
+h3 {
+    font-weight: bold;
+    margin-top:2rem;
+}
+
+a {
+    color: #0088cc;
+    text-decoration: none;
+}
+
+a:hover, a:active {
+    outline: 0;
+    color: #0088cc;
+    text-decoration: underline;
+}
+
+h1.hidden + * {
+    margin-top: 2rem;
+}
+
+/* LAYOUT */
+
+.wrapper {
+    width: 80%;
+    max-width: 540px;
+    margin: 0 auto;
+}
+
+
+/* NAV */
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 48px;
+    background: #000;
+    z-index: 100;
+}
+
+nav .wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    vertical-align: middle;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+nav select {
+    background: #333;
+    border: none;
+    color: white;
+    border-radius: 3px;
+    padding: 4px 6px;
+}
+
+nav a {
+    color: #aaa!important;
+    text-decoration: none!important;
+    line-height: 48px;
+    font-weight: bold;
+    display: block;
+}
+
+nav a.on {
+    color: #fff!important;
+}
+
+/* MAIN */
+
+main {
+    padding-top: 48px;
+    padding-bottom: 1rem;
+}
+
+
+/* MISC */
+
+
+.faute:hover span {
+    display: none;
+}
+.faute:hover:before {
+    content: attr(data-alt);
+    cursor: text;
+}
+.hide, .hidden {
+    display: none;
+}
+.clear {
+    clear: both;
+    width: 100%;
+}
+
+/* AGENDA */
+
+.agenda {
+    padding: 0;
+    list-style: none;
+}
+.agenda .past {
+    opacity: 0.75;
+}
+.event .title {
+    font-weight: bold;
+    display: block;
+}
+.agenda .detail {
+    padding-left: 28px;
+    position: relative;
+    display: block;
+}
+.agenda .detail a {
+    color:inherit;
+}
+.agenda .detail:before {
+    content:"//";
+    position: absolute;
+    left:16px;
+}
+
+.agenda .clear {
+    margin-bottom: 2rem;
+}
+.agenda .gate {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+
+}
+.agenda .gate-label {
+    user-select: none;
+    position: relative;
+}
+.agenda .gate-label:after {
+    content:"";
+    width: 9px;
+    height: 9px;
+    background: white;
+    border:1px solid black;
+    display: inline-block;
+    position: relative;
+    margin-left: 6px;
+    top:1px;
+}
+.agenda .gate-label:before {
+    content:"";
+    width: 5px;
+    height: 2px;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    transform: rotate(-45deg);
+    position: absolute;
+    right: 2px;
+    top:5px;
+    display: none;
+    z-index: 1;
+}
+.agenda .gate:checked + .gate-label:before {
+    display: block;
+}
+
+.agenda .gate[name="noise"]:checked ~ .noise {
+    display: none!important;
+}
+.agenda .gate[name="old"]:checked ~ .old {
+    display: block;
+}
+.agenda .gate, .agenda .gate-label {
+    float: right;
+}
+.agenda .event.old {
+    display: none;
+}
+
+
+/* MASTODON */
+
+.tweet {
+    margin-top: 1rem;
+    padding: 10px;
+    border: 1px solid #ddd;
+    transition: border-color .25s;
+}
+.tweet:hover {
+    border-color:#ccc;
+}
+.tweet > :first-child {
+    margin-top:0;
+}
+.tweet > :last-child {
+    margin-bottom:0;
+}
+.media {
+    width: 100%;
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+.media img {
+    width: 100%;
+    height: auto;
+}
+.media.video::before, .media.video:after {
+    content:"";
+    border-left:60px solid white;
+    border-bottom: 30px solid transparent;
+    border-top: 30px solid transparent;
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin-top: -30px;
+    margin-left: -30px;
+    opacity: 0.95;
+    z-index: 1;
+}
+.media.video:before {
+    border-left-color:black;
+    opacity: 0.5;
+    transform: translate(10px, 10px);
+    z-index: 0;
+}
+.media .title {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    background: rgba(0,0,0, 0.5);
+    padding: 1rem;
+    color: white;
+}
+/* .media.video:before {
+    content:"";
+    background: rgba(0,0,0,0.05);
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+} */
+.tweet .when {
+    float:right;
+    position: relative;
+    padding: 5px;
+    top:-10px;
+    right:-10px;
+    color:#777;
+}
+.tweet .when + p {
+    margin-top: 0;
+}
+.tag {
+    color:#777;
+}
+img {
+    max-width: 100%;
+    display: block;
+}
+.newsletter-subscribe input {
+    display:block;
+    height: 30px;
+    padding: 0 5px;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+}
+.newsletter-subscribe .email {
+    float:left;
+    width: 200px;
+    border-bottom: 2px solid #000;
+    margin-right: 10px;
+}
+.newsletter-subscribe .submit {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+    cursor: pointer;
+}
+#spip-admin{
+    right:0;
+}
+
+
+.fat-btn {
+    background: #000;
+    color: #fff!important;
+    font-weight: bold;
+    border-color: #000;
+    cursor: pointer;
+    padding: 8px;
+    display: block;
+    text-align: center;
+}

@@ -1,12 +1,8 @@
 #SET{bros, #ARRAY{nano,124288,alain,273131,plagiat,120928,fleurymichto,121015,missy,124172}}
 
-#SET{accountid, #ID}
-
-[(#BRO|oui)
 #SET{accountid, #GET{bros}|table_valeur{#BRO,120928}}
-]
 
-<BOUCLE_masto(DATA){source Mastodon, #VAL{accounts/#GET{accountid}/statuses?exclude_replies=1&tagged=#STORY}}{0,20}{si #ID_RUBRIQUE|!={8}|ou{#BRO|oui}}>
+<BOUCLE_masto(DATA){source Mastodon, #VAL{accounts/#GET{accountid}/statuses?exclude_reblogs=1&exclude_replies=1&tagged=#TAG}}{0,20}{si #ID_RUBRIQUE|!={8}|ou{#BRO|oui}}>
 
 <div class="tweet">
 
@@ -26,8 +22,8 @@
 <a class="media" href="#VALEUR{card/url}"><img src="[(#VALEUR{card/url}|image_reduire{518,0}|extraire_attribut{src})]"/></a>
 ]
 
-[(#VALEUR{card/type}|match{gifv|video}|oui)
-<a class="media video" href="#VALEUR{card/url}"><img src="[(#VALEUR{card/image}|sinon{#CHEMIN{src/img/thumb.png}}|image_reduire{518,0}|extraire_attribut{src})]"/></a>
+[(#VALEUR{card/type}|match{gifv|video}|et{#VALEUR{card/image}}|oui)
+<a class="media video" href="#VALEUR{card/url}"><img src="[(#VALEUR{card/image}|image_reduire{518,0}|extraire_attribut{src})]"/></a>
 ]
 <//B_media>
 
@@ -36,17 +32,14 @@
 
 </BOUCLE_masto>
 
-[(#STORY|non)
+[(#TAG|non)
 
 <div class="tweet">
-    <center><a href="https://framapiaf.org/@PlagiatBros">PLUS DE CLICS</a></center>
-</div>
-
-<div class="tweet">
-    <center><a href="https://twitter.com/PlagiatBros">OOOLD</a></center>
+    <center><a href="https://framapiaf.org/@PlagiatBros">@PlagiatBros</a></center>
 </div>
 
 ]
+
 </B_masto>
 
 <div class="tweet">

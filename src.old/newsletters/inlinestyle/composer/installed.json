@@ -1,0 +1,96 @@
+[
+    {
+        "name": "symfony/css-selector",
+        "version": "v2.4.0",
+        "version_normalized": "2.4.0.0",
+        "target-dir": "Symfony/Component/CssSelector",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/CssSelector.git",
+            "reference": "d7524797f1a6b20a8c7c31fbdd64f38fbfce1797"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/CssSelector/zipball/d7524797f1a6b20a8c7c31fbdd64f38fbfce1797",
+            "reference": "d7524797f1a6b20a8c7c31fbdd64f38fbfce1797",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "time": "2013-11-11 18:40:07",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Symfony\\Component\\CssSelector\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "http://symfony.com/contributors"
+            },
+            {
+                "name": "Jean-François Simon",
+                "email": "jeanfrancois.simon@sensiolabs.com"
+            }
+        ],
+        "description": "Symfony CssSelector Component",
+        "homepage": "http://symfony.com"
+    },
+    {
+        "name": "inlinestyle/inlinestyle",
+        "version": "1.2.0",
+        "version_normalized": "1.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/christiaan/InlineStyle.git",
+            "reference": "22d62d6d0bc24966fb55ce8fb887d6bedbe026a7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/christiaan/InlineStyle/zipball/22d62d6d0bc24966fb55ce8fb887d6bedbe026a7",
+            "reference": "22d62d6d0bc24966fb55ce8fb887d6bedbe026a7",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3",
+            "symfony/css-selector": "~2.1"
+        },
+        "time": "2013-12-11 12:15:23",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "InlineStyle": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Christiaan Baartse"
+            },
+            {
+                "name": "Michael Tibben"
+            }
+        ],
+        "description": "Apply CSS stylesheets directly as inline styles to a HTML document"
+    }
+]

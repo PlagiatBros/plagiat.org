@@ -1,0 +1,12 @@
+<div class="newsletter-subscribe">
+	[(#ENV{editable})
+	<form method='post' action='#newsletter'>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#SET{name,session_email}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<input type="email" placeholder="example@anthurus.free.fr" name="#GET{name}" class="email" id="#GET{name}" required/>
+		<input type='submit' class='submit' value="Je m'insssscris !"/>
+	</form>
+	]
+	[<p class="ok">(#ENV**{message_ok})</p>]
+	[<p class="ko">(#ENV*{message_erreur})</p>]
+</div>
