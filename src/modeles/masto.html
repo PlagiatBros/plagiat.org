@@ -1,8 +1,9 @@
 #SET{bros, #ARRAY{nano,124288,alain,273131,plagiat,120928,fleurymichto,121015,missy,124172}}
 
 #SET{accountid, #GET{bros}|table_valeur{#BRO,120928}}
+#SET{tag, #TAG|sinon{#STORY}}
 
-<BOUCLE_masto(DATA){source Mastodon, #VAL{accounts/#GET{accountid}/statuses?exclude_reblogs=1&exclude_replies=1&tagged=#TAG}}{0,20}{si #ID_RUBRIQUE|!={8}|ou{#BRO|oui}}>
+<BOUCLE_masto(DATA){source Mastodon, #VAL{accounts/#GET{accountid}/statuses?exclude_reblogs=1&exclude_replies=1&tagged=#GET{tag}}}{0,20}{si #ID_RUBRIQUE|!={8}|ou{#BRO|oui}}>
 
 <div class="tweet">
 
@@ -32,7 +33,7 @@
 
 </BOUCLE_masto>
 
-[(#TAG|non)
+[(#GET{tag}|non)
 
 <div class="tweet">
     <center><a href="https://framapiaf.org/@PlagiatBros">@PlagiatBros</a></center>
