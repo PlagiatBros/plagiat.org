@@ -1,0 +1,10 @@
+<div id="rubrique-nav">
+    <BOUCLE_titre(RUBRIQUES){id_rubrique}>
+    <h3><a href="#URL_RUBRIQUE" class="[(#SELF|=={#URL_RUBRIQUE}|oui)on]">#TITRE</a></h3>
+    </BOUCLE_titre>
+    <ul>
+    <BOUCLE_articles(ARTICLES){id_rubrique=#ID_RUBRIQUE}>
+        <li><a href="#URL_ARTICLE" class="[(#EXPOSE|oui)on]">#TITRE</a></li>
+    </BOUCLE_articles>
+    </ul>
+</div>

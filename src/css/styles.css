@@ -63,7 +63,7 @@ a:hover, a:active {
     text-decoration: underline;
 }
 
-h1.hidden + * {
+h1.hidden + *, h3.hidden + * {
     margin-top: 2rem;
 }
 
@@ -145,6 +145,13 @@ main:before {
     pointer-events: none;
 }
 
+#rubrique-nav {
+    margin-top: 2rem;
+}
+#rubrique-nav .on {
+    /* font-weight: bold; */
+    color: inherit;
+}
 /* MISC */
 
 

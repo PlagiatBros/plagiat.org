@@ -1,6 +1,8 @@
 <BOUCLE_article(ARTICLES){id_article=#ID_ARTICLE}{lang_select=non}>
 
-<h1>#TITRE</h1>
+#INCLURE{fond=modeles/liste_articles, env, id_rubrique=#ID_RUBRIQUE}
+
+<h3>#TITRE</h3>
 
 #TEXTE
 
